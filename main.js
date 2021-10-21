@@ -13,6 +13,8 @@ else if (mode == 3) {
     selMode = 49;
 }
 
+
+
 else {
     window.alert("non hai inserito una difficoltà valida!")
 }
@@ -52,12 +54,13 @@ function generateBombs() {
 }
 
 const bomblist = generateBombs();
-console.log(bomblist);
 
 let endgame;
+
 for (let index = 0; index < selMode; index++) {
     let elemento = document.querySelectorAll(".cella")[index]
     elemento.addEventListener("click", function addColor(e) {
+        let counter = 0;
         let selDiv = document.querySelectorAll(".cella")[index]
         if (bomblist.includes(parseInt(selDiv.innerHTML))) {
             for (let index = 1; index <= selMode; index++) {
@@ -73,6 +76,12 @@ for (let index = 0; index < selMode; index++) {
         }
         else {
             selDiv.style.backgroundColor = "cyan";
+            counter = counter + 1;
+        }
+        if (counter == (selMode - 16)) {
+            const text = document.getElementById("you_lose")
+            text.innerHTML = "complimenti, hai vinto!"
+            text.className = "text_v"
         }
         if (endgame == false) {
             if (elemento.style.backgroundColor == "cyan") {
