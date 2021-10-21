@@ -54,7 +54,7 @@ function generateBombs() {
 }
 
 const bomblist = generateBombs();
-let endgame;
+let endgame = true;
 
 for (let index = 0; index < selMode; index++) {
     let elemento = document.querySelectorAll(".cella")[index]
@@ -74,8 +74,12 @@ for (let index = 0; index < selMode; index++) {
             }
         }
         else {
-            selDiv.style.backgroundColor = "cyan";
-            counter = counter + 1;
+            console.log(endgame)
+            if (endgame == true) {
+                selDiv.style.backgroundColor = "cyan";
+                counter = counter + 1;
+            }
+
         }
         if (counter == (selMode - bomblist.length)) {
             const text = document.getElementById("you_lose")
@@ -83,9 +87,9 @@ for (let index = 0; index < selMode; index++) {
             text.className = "text_v"
         }
         if (endgame == false) {
-            if (elemento.style.backgroundColor == "cyan") {
-                elemento.style.backgroundColor = "white"
-            }
+            console.log(elemento.style.backgroundColor)
+
+
             for (let index = 0; index < selMode; index++) {
                 elemento.removeEventListener("click", addColor);
             }
