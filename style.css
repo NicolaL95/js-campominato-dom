@@ -17,3 +17,13 @@
 .red{
     background-color: red;
 }
+
+.text_f{
+    display: flex;
+    justify-content: center;
+    height: 50px;
+    align-items: center;
+    font-size: 3.5rem;
+    color: red;
+    font-weight: 800;
+}

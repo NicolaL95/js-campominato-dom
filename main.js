@@ -54,57 +54,34 @@ function generateBombs() {
 const bomblist = generateBombs();
 console.log(bomblist);
 
-/* for (let index = 0; index < selMode; index++) {
-    document.querySelectorAll(".cella")[index].onclick = e => {
-        let selDiv = e.target
-        console.log(document.querySelector(".cella"))
-        if (bomblist.includes(parseInt(selDiv.innerHTML))) {
-           
-            for (let index = 1; index <= selMode; index++) {
-                const element = document.getElementsByClassName("cella")[index - 1]
-                console.log(index, element)
-                if (bomblist.includes(parseInt(element.innerHTML))) {
-                    element.style.backgroundColor = "red";
-                    console.log("yes")
-
-                }
-
-            }
-
-        }
-        else {
-            selDiv.style.backgroundColor = "cyan";
-            console.log("no")
-
-        }
-    }
-} */
-
 let endgame;
 for (let index = 0; index < selMode; index++) {
-    let element = document.querySelectorAll(".cella")[index]
-    element.addEventListener("click", function addColor(event) {
+    let elemento = document.querySelectorAll(".cella")[index]
+    elemento.addEventListener("click", function addColor(e) {
         let selDiv = document.querySelectorAll(".cella")[index]
         if (bomblist.includes(parseInt(selDiv.innerHTML))) {
             for (let index = 1; index <= selMode; index++) {
                 const element = document.getElementsByClassName("cella")[index - 1];
                 if (bomblist.includes(parseInt(element.innerHTML))) {
                     element.style.backgroundColor = "red";
-                    console.log("yes")
                     endgame = false;
+                    const text = document.getElementById("you_lose")
+                    text.innerHTML = "Mi dispiace, hai perso!"
+                    text.className = "text_f"
                 }
             }
         }
         else {
             selDiv.style.backgroundColor = "cyan";
-            console.log("no")
         }
         if (endgame == false) {
+            if (elemento.style.backgroundColor == "cyan") {
+                elemento.style.backgroundColor = "white"
+            }
             for (let index = 0; index < selMode; index++) {
-                let element = document.querySelectorAll(".cella")[index];
-                element.removeEventListener("click", addColor, true);
+                elemento.removeEventListener("click", addColor);
             }
         }
     })
-
 }
+
