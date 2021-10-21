@@ -54,7 +54,6 @@ function generateBombs() {
 }
 
 const bomblist = generateBombs();
-
 let endgame;
 
 for (let index = 0; index < selMode; index++) {
@@ -78,7 +77,7 @@ for (let index = 0; index < selMode; index++) {
             selDiv.style.backgroundColor = "cyan";
             counter = counter + 1;
         }
-        if (counter == (selMode - 16)) {
+        if (counter == (selMode - bomblist.length)) {
             const text = document.getElementById("you_lose")
             text.innerHTML = "complimenti, hai vinto!"
             text.className = "text_v"
