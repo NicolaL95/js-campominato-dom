@@ -54,21 +54,6 @@ function generateBombs() {
 const bomblist = generateBombs();
 console.log(bomblist);
 
-/* window.onclick = e => {
-    let selDiv = e.target
-    for (let index = 1; index <= selMode; index++) {
-        const divGrid = document.getElementsByClassName("cella")[index - 1]
-        if (divGrid == selDiv) {
-            if (divGrid.classList.contains("cyan")) {
-                divGrid.classList.remove("cyan")
-            }
-            else {
-                divGrid.classList.add("cyan")
-            }
-        }
-    }
-}
- */
 /* for (let index = 0; index < selMode; index++) {
     document.querySelectorAll(".cella")[index].onclick = e => {
         let selDiv = e.target
@@ -95,20 +80,18 @@ console.log(bomblist);
     }
 } */
 
+let endgame;
 for (let index = 0; index < selMode; index++) {
-    document.querySelectorAll(".cella")[index].addEventListener("click", function () {
+    let element = document.querySelectorAll(".cella")[index]
+    element.addEventListener("click", function addColor(event) {
         let selDiv = document.querySelectorAll(".cella")[index]
-        console.log(document.querySelector(".cella"))
         if (bomblist.includes(parseInt(selDiv.innerHTML))) {
-
             for (let index = 1; index <= selMode; index++) {
-                const element = document.getElementsByClassName("cella")[index - 1]
-                console.log(index, element)
+                const element = document.getElementsByClassName("cella")[index - 1];
                 if (bomblist.includes(parseInt(element.innerHTML))) {
                     element.style.backgroundColor = "red";
                     console.log("yes")
-                    for (let index = 0; index < selMode; index++) {
-                    }
+                    endgame = false;
                 }
             }
         }
@@ -116,31 +99,12 @@ for (let index = 0; index < selMode; index++) {
             selDiv.style.backgroundColor = "cyan";
             console.log("no")
         }
-    })
-}
-
-
-/* function colordiv() {
-    for (let index = 1; index < selMode; index++) {
-
-        let selDiv = document.querySelectorAll(".cella")[index]
-
-        if (bomblist.includes(parseInt(selDiv.innerHTML))) {
-            for (let index = 1; index <= selMode; index++) {
-                const element = document.getElementsByClassName("cella")[index]
-
-                if (bomblist.includes(parseInt(element.innerHTML))) {
-                    element.style.backgroundColor = "red";
-                    console.log("yes")
-                    for (let index = 0; index < selMode; index++) {
-
-                    }
-                }
+        if (endgame == false) {
+            for (let index = 0; index < selMode; index++) {
+                let element = document.querySelectorAll(".cella")[index];
+                element.removeEventListener("click", addColor, true);
             }
         }
-    }
-}
+    })
 
-for (let index = 1; index < selMode; index++) {
-    document.querySelectorAll(".cella")[index].addEventListener("click", colordiv)
-} */
+}
